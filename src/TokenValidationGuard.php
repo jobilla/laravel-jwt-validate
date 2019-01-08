@@ -2,12 +2,11 @@
 
 namespace Jobilla\JwtValidate;
 
-use Firebase\JWT\JWT;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Auth\GuardHelpers;
-use Illuminate\Http\Request;
 use Lcobucci\JWT\Parser;
+use Illuminate\Http\Request;
+use Illuminate\Auth\GuardHelpers;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
+use Illuminate\Auth\AuthenticationException;
 
 class TokenValidationGuard
 {
@@ -38,7 +37,7 @@ class TokenValidationGuard
         try {
             $token = (new Parser)->parse($request->bearerToken());
 
-            if (! $token->verify(new Sha256(), $this->publicKeyPath)) {
+            if (! $token->verify(new Sha256(), 'file://'.$this->publicKeyPath)) {
                 throw new AuthenticationException;
             }
         } catch (\Exception $e) {
