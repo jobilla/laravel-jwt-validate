@@ -1,5 +1,5 @@
 {
-    "name": "jobilla/laravel-passport-validate",
+    "name": "jobilla/laravel-jwt-validate",
     "authors": [
         {
             "name": "Leo Sjöberg",
