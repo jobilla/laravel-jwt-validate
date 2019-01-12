@@ -31,17 +31,17 @@ class TokenValidationGuard
     public function user(Request $request)
     {
         if (! $request->bearerToken()) {
-            throw new AuthenticationException;
+            return null;
         }
 
         try {
             $token = (new Parser)->parse($request->bearerToken());
 
             if (! $token->verify(new Sha256(), 'file://'.$this->publicKeyPath)) {
-                throw new AuthenticationException;
+                return null;
             }
         } catch (\Exception $e) {
-            throw new AuthenticationException;
+            return null;
         }
 
         return call_user_func_array($this->userHydrator, [$token->getClaims(), $request]);

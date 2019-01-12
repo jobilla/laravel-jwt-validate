@@ -10,20 +10,14 @@ use PHPUnit\Framework\TestCase;
 
 class GuardTest extends TestCase
 {
-    /**
-     * @expectedException \Illuminate\Auth\AuthenticationException
-     */
-    public function test_it_throws_an_authentication_exception_if_there_is_no_bearer_token()
+    public function test_it_returns_null_user_if_there_is_no_bearer_token()
     {
         $guard = new TokenValidationGuard(__DIR__.'/fixtures/public.key', function () {});
 
-        $guard->user(new Request());
+        $this->assertNull($guard->user(new Request()));
     }
 
-    /**
-     * @expectedException \Illuminate\Auth\AuthenticationException
-     */
-    public function test_it_throws_an_authentication_exception_if_the_wrong_public_key_is_used()
+    public function test_it_returns_null_user_if_the_wrong_public_key_is_used()
     {
         $guard = new TokenValidationGuard(__DIR__.'/fixtures/invalid-public.key', function () {});
 
@@ -37,7 +31,7 @@ class GuardTest extends TestCase
             ->getToken();
         $request = new Request([], [], [], [], [], ['HTTP_AUTHORIZATION' => 'Bearer '.$jwt]);
 
-        $guard->user($request);
+        $this->assertNull($guard->user($request));
     }
 
     public function test_it_hydrates_a_model_from_a_valid_jwt()
