@@ -13,8 +13,8 @@
         }
     },
     "require": {
-        "illuminate/support": "5.7.* | 5.8.* | ^6.0",
-        "illuminate/auth": "5.7.* | 5.8.* | ^6.0",
+        "illuminate/support": "5.7.* | 5.8.* | ^6.0 | ^7.0 | ^8.0",
+        "illuminate/auth": "5.7.* | 5.8.* | ^6.0 | ^7.0 | ^8.0",
         "lcobucci/jwt": "^3.2"
     },
     "require-dev": {
