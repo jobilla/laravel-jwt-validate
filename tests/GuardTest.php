@@ -4,7 +4,7 @@ namespace Jobilla\JwtValidate\Tests;
 
 use Illuminate\Http\Request;
 use Jobilla\JwtValidate\TokenValidationGuard;
-use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Token\Builder;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
 use PHPUnit\Framework\TestCase;
 
