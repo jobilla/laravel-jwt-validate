@@ -2,11 +2,10 @@
 
 namespace Jobilla\JwtValidate;
 
-use Lcobucci\JWT\Parser;
-use Illuminate\Http\Request;
 use Illuminate\Auth\GuardHelpers;
+use Illuminate\Http\Request;
+use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
-use Illuminate\Auth\AuthenticationException;
 
 class TokenValidationGuard
 {
@@ -30,14 +29,14 @@ class TokenValidationGuard
 
     public function user(Request $request)
     {
-        if (! $request->bearerToken()) {
+        if (!$request->bearerToken()) {
             return null;
         }
 
         try {
-            $token = (new Parser)->parse($request->bearerToken());
+            $token = app(Parser::class)->parse($request->bearerToken());
 
-            if (! $token->verify(new Sha256(), 'file://'.$this->publicKeyPath)) {
+            if (!$token->verify(new Sha256(), 'file://' . $this->publicKeyPath)) {
                 return null;
             }
         } catch (\Exception $e) {
